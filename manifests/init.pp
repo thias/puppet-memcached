@@ -26,11 +26,15 @@ class memcached (
     require   => Package['memcached'],
   }
 
+  file { '/etc/sysconfig':
+    ensure => directory
+  }
+
   # Configuration
   file { '/etc/sysconfig/memcached':
     content => template('memcached/sysconfig.erb'),
     notify  => Service['memcached'],
-    require => Package['memcached'],
+    require => [ Package['memcached'], File["/etc/sysconfig"] ]
   }
 
 }
