@@ -17,11 +17,11 @@ class memcached (
   $options   = ''
 ) {
 
-  package { 'memcached': ensure => installed }
+  package { 'memcached': ensure => 'installed' }
 
   service { 'memcached':
+    ensure    => 'running',
     enable    => true,
-    ensure    => running,
     hasstatus => true,
     require   => Package['memcached'],
   }
@@ -34,4 +34,3 @@ class memcached (
   }
 
 }
-
